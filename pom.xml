@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.thanus</groupId>
-    <artifactId>rpn-calculator</artifactId>
+    <artifactId>rpn</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
