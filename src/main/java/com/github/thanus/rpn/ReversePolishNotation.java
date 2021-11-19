@@ -1,7 +1,15 @@
 package com.github.thanus.rpn;
 
+import com.github.thanus.rpn.operations.Clear;
+import com.github.thanus.rpn.operations.math.Addition;
+import com.github.thanus.rpn.operations.math.Division;
+import com.github.thanus.rpn.operations.math.Multiplication;
+import com.github.thanus.rpn.operations.math.SquareRoot;
+import com.github.thanus.rpn.operations.math.Subtraction;
+
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class ReversePolishNotation {
     public static void main(String[] args) {
@@ -9,55 +17,48 @@ public class ReversePolishNotation {
 
         final var scanner = new Scanner(System.in);
 
-        final var stack = new Stack<String>();
+        final var stack = new Stack<Operand>();
 
         while (scanner.hasNextLine()) {
             final var expression = scanner.nextLine();
             process(expression, stack);
-            System.out.println("stack: " + String.join(" ", stack));
+            System.out.println("stack: " + stack.stream().map(Operand::getDisplayValue).collect(Collectors.joining(" ")));
         }
 
     }
 
-    private static void process(String expression, Stack<String> stack) {
-        for (var value : expression.split(" ")) {
-            if (value.chars().allMatch(Character::isDigit)) {
-                stack.push(value);
+    private static void process(String expression, Stack<Operand> stack) {
+        for (var val : expression.split(" ")) {
+            try {
+                final var operand = new Operand(val);
+                stack.push(operand);
                 continue;
+            } catch (NumberFormatException ignored) {
             }
 
-            switch (value) {
+            switch (val) {
                 case "+": {
-                    final var secondOperand = stack.pop();
-                    final var firstOperand = stack.pop();
-                    stack.push(String.valueOf(Integer.parseInt(firstOperand) + Integer.parseInt(secondOperand)));
+                    new Addition().operate(stack);
                     break;
                 }
                 case "-": {
-                    final var secondOperand = stack.pop();
-                    final var firstOperand = stack.pop();
-                    stack.push(String.valueOf(Integer.parseInt(firstOperand) - Integer.parseInt(secondOperand)));
+                    new Subtraction().operate(stack);
                     break;
                 }
                 case "*": {
-                    final var secondOperand = stack.pop();
-                    final var firstOperand = stack.pop();
-                    stack.push(String.valueOf(Integer.parseInt(firstOperand) * Integer.parseInt(secondOperand)));
+                    new Multiplication().operate(stack);
                     break;
                 }
                 case "/": {
-                    final var secondOperand = stack.pop();
-                    final var firstOperand = stack.pop();
-                    stack.push(String.valueOf(Integer.parseInt(firstOperand) / Integer.parseInt(secondOperand)));
+                    new Division().operate(stack);
                     break;
                 }
                 case "sqrt": {
-                    final var firstOperand = stack.pop();
-                    stack.push(String.valueOf(Math.sqrt(Double.parseDouble(firstOperand))));
+                    new SquareRoot().operate(stack);
                     break;
                 }
                 case "clear": {
-                    stack.clear();
+                    new Clear().operate(stack);
                     break;
                 }
             }
