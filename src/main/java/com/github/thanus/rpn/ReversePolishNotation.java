@@ -1,11 +1,6 @@
 package com.github.thanus.rpn;
 
-import com.github.thanus.rpn.operations.Clear;
-import com.github.thanus.rpn.operations.math.Addition;
-import com.github.thanus.rpn.operations.math.Division;
-import com.github.thanus.rpn.operations.math.Multiplication;
-import com.github.thanus.rpn.operations.math.SquareRoot;
-import com.github.thanus.rpn.operations.math.Subtraction;
+import com.github.thanus.rpn.operations.OperationsParser;
 
 import java.util.Scanner;
 import java.util.Stack;
@@ -36,32 +31,8 @@ public class ReversePolishNotation {
             } catch (NumberFormatException ignored) {
             }
 
-            switch (val) {
-                case "+": {
-                    new Addition().operate(stack);
-                    break;
-                }
-                case "-": {
-                    new Subtraction().operate(stack);
-                    break;
-                }
-                case "*": {
-                    new Multiplication().operate(stack);
-                    break;
-                }
-                case "/": {
-                    new Division().operate(stack);
-                    break;
-                }
-                case "sqrt": {
-                    new SquareRoot().operate(stack);
-                    break;
-                }
-                case "clear": {
-                    new Clear().operate(stack);
-                    break;
-                }
-            }
+            final var operation = OperationsParser.parse(val);
+            operation.operate(stack);
         }
     }
 }
