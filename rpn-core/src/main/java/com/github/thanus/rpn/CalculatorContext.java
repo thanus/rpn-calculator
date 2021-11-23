@@ -43,6 +43,7 @@ public class CalculatorContext {
                 .collect(Collectors.joining(" "));
     }
 
+    @SuppressWarnings("unchecked")
     public CalculatorContextMemento save() {
         return new CalculatorContextMemento((Stack<Operand>) stack.clone());
     }
