@@ -2,6 +2,7 @@ package com.github.thanus.rpn;
 
 import com.github.thanus.rpn.operations.OperationsParser;
 import com.github.thanus.rpn.operations.UnknownOperationException;
+import com.github.thanus.rpn.operations.math.InsufficientParametersException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayDeque;
@@ -41,8 +42,7 @@ public class ReversePolishNotation {
             } catch (UnknownOperationException exception) {
                 log.error("operator {} (position: {}): unknown operator", exception.getOperation(), position);
                 break;
-            } catch (CalculatorException e) {
-                log.error("Something went wrong", e);
+            } catch (CalculatorException ignored) {
                 break;
             }
         }

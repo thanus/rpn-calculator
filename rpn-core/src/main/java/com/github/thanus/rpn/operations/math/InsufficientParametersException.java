@@ -1,4 +1,6 @@
-package com.github.thanus.rpn;
+package com.github.thanus.rpn.operations.math;
+
+import com.github.thanus.rpn.CalculatorException;
 
 public class InsufficientParametersException extends CalculatorException {
     public InsufficientParametersException() {
