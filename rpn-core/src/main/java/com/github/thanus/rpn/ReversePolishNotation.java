@@ -17,6 +17,10 @@ public class ReversePolishNotation {
     private final Deque<CalculatorContextMemento> mementos = new ArrayDeque<>();
     private final CalculatorContext calculatorContext = new CalculatorContext();
 
+    public ReversePolishNotation() {
+        addMemento(calculatorContext.save());
+    }
+
     public void process(String expression) {
         var position = 1;
 
