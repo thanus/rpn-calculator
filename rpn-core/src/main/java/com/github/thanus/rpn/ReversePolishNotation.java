@@ -1,6 +1,7 @@
 package com.github.thanus.rpn;
 
 import com.github.thanus.rpn.operations.OperationsParser;
+import com.github.thanus.rpn.operations.UnknownOperationException;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -26,13 +27,17 @@ public class ReversePolishNotation {
             } catch (NumberFormatException ignored) {
             }
 
-            final var operation = OperationsParser.parse(val);
             try {
+                final var operation = OperationsParser.parse(val);
                 operation.operate(calculatorContext, mementos);
+
                 addMemento(calculatorContext.save());
                 position += val.length() + 1;
             } catch (InsufficientParametersException e) {
                 System.out.println("operator " + val + " (position: " + position + "): insufficient parameters");
+                break;
+            } catch (UnknownOperationException exception) {
+                System.out.println("operator " + exception.getOperation() + " (position: " + position + "): unknown operator");
                 break;
             } catch (CalculatorException e) {
                 e.printStackTrace();
@@ -41,11 +46,12 @@ public class ReversePolishNotation {
         }
     }
 
-    public void addMemento(CalculatorContextMemento calculatorContextMemento) {
-        mementos.push(calculatorContextMemento);
-    }
-
     public String getDisplayValueContent() {
         return calculatorContext.getDisplayValueContent();
     }
+
+    private void addMemento(CalculatorContextMemento calculatorContextMemento) {
+        mementos.push(calculatorContextMemento);
+    }
+
 }

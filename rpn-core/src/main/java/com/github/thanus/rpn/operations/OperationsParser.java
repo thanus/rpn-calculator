@@ -8,7 +8,7 @@ import com.github.thanus.rpn.operations.math.Subtraction;
 
 public class OperationsParser {
 
-    public static Operation parse(String operation) {
+    public static Operation parse(String operation) throws UnknownOperationException {
         switch (operation) {
             case "+": {
                 return new Addition();
@@ -32,7 +32,7 @@ public class OperationsParser {
                 return new Undo();
             }
             default:
-                throw new IllegalArgumentException("Unknown operation " + operation);
+                throw new UnknownOperationException(operation);
         }
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayDeque;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorContextTest {
-    final static Operand OPERAND = new Operand(BigDecimal.ONE);
+    final static Operand OPERAND = new Operand("1");
 
     @Test
     void shouldPushOperand() {
