@@ -2,6 +2,7 @@ package com.github.thanus.rpn.operations;
 
 import com.github.thanus.rpn.CalculatorContext;
 import com.github.thanus.rpn.CalculatorContextMemento;
+import com.github.thanus.rpn.CalculatorException;
 import com.github.thanus.rpn.Operand;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UndoTest {
 
     @Test
-    void shouldUndoLastOperation() {
+    void shouldUndoLastOperation() throws CalculatorException {
         final var mementos = new ArrayDeque<CalculatorContextMemento>();
         final var calculatorContext = new CalculatorContext();
 
@@ -28,5 +29,15 @@ class UndoTest {
         assertThat(calculatorContext.size()).isEqualTo(1);
         assertThat(mementos.size()).isEqualTo(0);
         assertThat(calculatorContext.getDisplayValueContent()).isEqualTo("5");
+    }
+
+    @Test
+    void shouldNotUndoWhenEmptyContext() throws CalculatorException {
+        final var mementos = new ArrayDeque<CalculatorContextMemento>();
+        final var calculatorContext = new CalculatorContext();
+
+        new Undo().operate(calculatorContext, mementos);
+
+        assertThat(calculatorContext.size()).isEqualTo(0);
     }
 }

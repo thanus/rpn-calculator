@@ -74,7 +74,7 @@ class CalculatorContextTest {
     }
 
     @Test
-    void shouldDisplayValueContentWithPrecision() {
+    void shouldDisplayValueContentWithPrecision() throws CalculatorException {
         final var calculatorContext = new CalculatorContext();
         calculatorContext.push(new Operand(new BigDecimal(2)));
 

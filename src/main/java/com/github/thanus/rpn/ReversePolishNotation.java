@@ -27,18 +27,30 @@ public class ReversePolishNotation {
         while (scanner.hasNextLine()) {
             final var expression = scanner.nextLine();
 
+            var position = 1;
+
             for (var val : expression.split(" ")) {
                 try {
                     final var operand = new Operand(val);
                     calculatorContext.push(operand);
                     addMemento(calculatorContext.save());
+                    position += val.length() + 1;
                     continue;
                 } catch (NumberFormatException ignored) {
                 }
 
                 final var operation = OperationsParser.parse(val);
-                operation.operate(calculatorContext, mementos);
-                addMemento(calculatorContext.save());
+                try {
+                    operation.operate(calculatorContext, mementos);
+                    addMemento(calculatorContext.save());
+                    position += val.length() + 1;
+                } catch (InsufficientParametersException e) {
+                    System.out.println("operator " + val + " (position: " + position + "): insufficient parameters");
+                    break;
+                } catch (CalculatorException e) {
+                    e.printStackTrace();
+                    break;
+                }
             }
 
             System.out.println("stack: " + calculatorContext.getDisplayValueContent());

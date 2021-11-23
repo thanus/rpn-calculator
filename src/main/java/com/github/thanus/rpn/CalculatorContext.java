@@ -26,6 +26,14 @@ public class CalculatorContext {
         return stack.size();
     }
 
+    public boolean hasNoOperands() {
+        return stack.size() == 0;
+    }
+
+    public boolean hasLessThanTwoOperands() {
+        return stack.size() < 2;
+    }
+
     public String getDisplayValueContent() {
         return stack.stream()
                 .map(Operand::getDisplayValue)
