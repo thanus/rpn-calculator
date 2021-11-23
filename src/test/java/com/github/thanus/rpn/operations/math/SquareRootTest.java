@@ -5,7 +5,7 @@ import com.github.thanus.rpn.Operand;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +16,7 @@ class SquareRootTest {
         final var calculatorContext = new CalculatorContext();
         calculatorContext.push(new Operand(new BigDecimal(2)));
 
-        new SquareRoot().operate(calculatorContext);
+        new SquareRoot().operate(calculatorContext, new ArrayDeque<>());
 
         assertThat(calculatorContext.size()).isEqualTo(1);
         assertThat(calculatorContext.peek().getValue().toString()).isEqualTo("1.414213562373095");

@@ -4,7 +4,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class CalculatorContext {
-    final Stack<Operand> stack = new Stack<>();
+    private Stack<Operand> stack = new Stack<>();
 
     public void push(Operand operand) {
         stack.push(operand);
@@ -30,6 +30,14 @@ public class CalculatorContext {
         return stack.stream()
                 .map(Operand::getDisplayValue)
                 .collect(Collectors.joining(" "));
+    }
+
+    public CalculatorContextMemento save() {
+        return new CalculatorContextMemento((Stack<Operand>) stack.clone());
+    }
+
+    public void restore(CalculatorContextMemento calculatorContextMemento) {
+        stack = calculatorContextMemento.getStack();
     }
 
 }

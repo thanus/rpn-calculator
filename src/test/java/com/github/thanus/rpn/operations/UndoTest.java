@@ -10,18 +10,23 @@ import java.util.ArrayDeque;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ClearTest {
+class UndoTest {
 
     @Test
-    void shouldClearCalculatorContext() {
-        final var calculatorContext = new CalculatorContext();
-        calculatorContext.push(new Operand(new BigDecimal(5)));
-        calculatorContext.push(new Operand(new BigDecimal(2)));
-
+    void shouldUndoLastOperation() {
         final var mementos = new ArrayDeque<CalculatorContextMemento>();
-        new Clear().operate(calculatorContext, mementos);
+        final var calculatorContext = new CalculatorContext();
 
-        assertThat(calculatorContext.size()).isEqualTo(0);
+        calculatorContext.push(new Operand(new BigDecimal(5)));
+        mementos.push(calculatorContext.save());
+
+        calculatorContext.push(new Operand(new BigDecimal(2)));
+        mementos.push(calculatorContext.save());
+
+        new Undo().operate(calculatorContext, mementos);
+
+        assertThat(calculatorContext.size()).isEqualTo(1);
         assertThat(mementos.size()).isEqualTo(0);
+        assertThat(calculatorContext.getDisplayValueContent()).isEqualTo("5");
     }
 }

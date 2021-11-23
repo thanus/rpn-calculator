@@ -5,10 +5,12 @@ import com.github.thanus.rpn.CalculatorContextMemento;
 
 import java.util.Deque;
 
-public class Clear extends Operation {
+public class Undo extends Operation {
+
     @Override
     public void operate(CalculatorContext calculatorContext, Deque<CalculatorContextMemento> mementos) {
-        calculatorContext.clear();
-        mementos.clear();
+        mementos.pop();
+        final var previousState = mementos.pop();
+        calculatorContext.restore(previousState);
     }
 }

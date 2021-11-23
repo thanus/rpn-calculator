@@ -28,6 +28,9 @@ public class OperationsParser {
             case "clear": {
                 return new Clear();
             }
+            case "undo": {
+                return new Undo();
+            }
             default:
                 throw new IllegalArgumentException("Unknown operation " + operation);
         }
