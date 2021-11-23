@@ -16,7 +16,7 @@ public class ReversePolishNotation {
     public void process(String expression) {
         var position = 1;
 
-        for (var val : expression.split(" ")) {
+        for (var val : expression.trim().split(" ")) {
             try {
                 final var operand = new Operand(val);
                 calculatorContext.push(operand);
