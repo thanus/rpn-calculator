@@ -16,6 +16,10 @@
             <groupId>com.github.thanus</groupId>
             <artifactId>rpn-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

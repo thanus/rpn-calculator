@@ -2,6 +2,7 @@ package com.github.thanus.rpn;
 
 import com.github.thanus.rpn.operations.OperationsParser;
 import com.github.thanus.rpn.operations.UnknownOperationException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -9,6 +10,7 @@ import java.util.Deque;
 /**
  * caretaker
  */
+@Slf4j
 public class ReversePolishNotation {
 
     private final Deque<CalculatorContextMemento> mementos = new ArrayDeque<>();
@@ -34,13 +36,13 @@ public class ReversePolishNotation {
                 addMemento(calculatorContext.save());
                 position += val.length() + 1;
             } catch (InsufficientParametersException e) {
-                System.out.println("operator " + val + " (position: " + position + "): insufficient parameters");
+                log.warn("operator {} (position: {}): insufficient parameters", val, position);
                 break;
             } catch (UnknownOperationException exception) {
-                System.out.println("operator " + exception.getOperation() + " (position: " + position + "): unknown operator");
+                log.error("operator {} (position: {}): unknown operator", exception.getOperation(), position);
                 break;
             } catch (CalculatorException e) {
-                e.printStackTrace();
+                log.error("Something went wrong", e);
                 break;
             }
         }

@@ -16,6 +16,7 @@
 
     <properties>
         <lombok.version>1.18.22</lombok.version>
+        <slf4j-simple.version>1.7.31</slf4j-simple.version>
 
         <!-- Test -->
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
@@ -40,6 +41,11 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j-simple.version}</version>
             </dependency>
 
             <dependency>
