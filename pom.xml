@@ -11,6 +11,7 @@
 
     <modules>
         <module>rpn-core</module>
+        <module>rpn-cli</module>
     </modules>
 
     <properties>
@@ -30,6 +31,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.github.thanus</groupId>
+                <artifactId>rpn-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
