@@ -20,19 +20,16 @@ public class ReversePolishNotation {
     private final Deque<CalculatorContextMemento<Operand>> mementos = new ArrayDeque<>();
     private final Context<Operand> calculatorContext = new CalculatorContext();
 
-    public ReversePolishNotation() {
-        addMemento(calculatorContext.save());
-    }
-
     public String evaluate(String input) {
         var position = 1;
 
         for (var value : input.trim().split(" ")) {
+            addMemento(calculatorContext.save());
+
             if (Operand.isNumber(value)) {
                 final var operand = new Operand(value);
                 calculatorContext.push(operand);
 
-                addMemento(calculatorContext.save());
                 position += value.length() + 1;
 
                 continue;
@@ -42,7 +39,6 @@ public class ReversePolishNotation {
                 final var operation = OperationsParser.parse(value);
                 operation.operate(calculatorContext, mementos);
 
-                addMemento(calculatorContext.save());
                 position += value.length() + 1;
             } catch (InsufficientParametersException e) {
                 log.warn("operator {} (position: {}): insufficient parameters", value, position);
