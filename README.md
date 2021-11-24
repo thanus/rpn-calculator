@@ -1,5 +1,8 @@
 # RPN calculator
 
+[![CircleCI](https://circleci.com/gh/thanus/rpn-calculator/tree/main.svg?style=svg)](https://circleci.com/gh/thanus/rpn-calculator/tree/main)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/bef72701d3a84a039a1d05857d431509)](https://www.codacy.com/gh/thanus/rpn-calculator/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=thanus/rpn-calculator&amp;utm_campaign=Badge_Grade)
+
 A command-line reverse polish notation calculator written in Java. The calculator waits for user input and expects to
 receive strings containing whitespace separated lists of numbers and operators. Numbers are pushed on to the stack.
 Operators operate on numbers that are on the stack.
