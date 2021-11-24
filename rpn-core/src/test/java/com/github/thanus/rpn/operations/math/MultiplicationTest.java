@@ -1,6 +1,6 @@
 package com.github.thanus.rpn.operations.math;
 
-import com.github.thanus.rpn.CalculatorContext;
+import com.github.thanus.rpn.context.CalculatorContext;
 import com.github.thanus.rpn.CalculatorException;
 import com.github.thanus.rpn.Operand;
 import org.junit.jupiter.api.Test;

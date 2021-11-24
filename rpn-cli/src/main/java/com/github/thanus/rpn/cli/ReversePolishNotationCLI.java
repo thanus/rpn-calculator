@@ -19,8 +19,7 @@ public class ReversePolishNotationCLI {
         final var reversePolishNotation = new ReversePolishNotation();
 
         while (scanner.hasNextLine()) {
-            reversePolishNotation.evaluate(scanner.nextLine());
-            log.info("stack: " + reversePolishNotation.getDisplayValueContent());
+            log.info("stack: " + reversePolishNotation.evaluate(scanner.nextLine()));
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.github.thanus.rpn.operations;
 
-import com.github.thanus.rpn.CalculatorContext;
-import com.github.thanus.rpn.CalculatorContextMemento;
+import com.github.thanus.rpn.context.CalculatorContext;
+import com.github.thanus.rpn.context.CalculatorContextMemento;
 import com.github.thanus.rpn.CalculatorException;
 import com.github.thanus.rpn.Operand;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ class UndoTest {
 
     @Test
     void shouldUndoLastOperation() throws CalculatorException {
-        final var mementos = new ArrayDeque<CalculatorContextMemento>();
+        final var mementos = new ArrayDeque<CalculatorContextMemento<Operand>>();
         final var calculatorContext = new CalculatorContext();
 
         calculatorContext.push(new Operand(new BigDecimal(5)));
@@ -33,7 +33,7 @@ class UndoTest {
 
     @Test
     void shouldNotUndoWhenEmptyContext() throws CalculatorException {
-        final var mementos = new ArrayDeque<CalculatorContextMemento>();
+        final var mementos = new ArrayDeque<CalculatorContextMemento<Operand>>();
         final var calculatorContext = new CalculatorContext();
 
         new Undo().operate(calculatorContext, mementos);

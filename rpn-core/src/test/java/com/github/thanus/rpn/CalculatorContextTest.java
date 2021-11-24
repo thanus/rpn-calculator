@@ -1,5 +1,6 @@
 package com.github.thanus.rpn;
 
+import com.github.thanus.rpn.context.CalculatorContext;
 import com.github.thanus.rpn.operations.math.SquareRoot;
 import org.junit.jupiter.api.Test;
 
