@@ -7,18 +7,29 @@ A command-line reverse polish notation calculator written in Java. The calculato
 receive strings containing whitespace separated lists of numbers and operators. Numbers are pushed on to the stack.
 Operators operate on numbers that are on the stack.
 
+![Example](assets/example.png)
+
 The calculator has the following features:
 - Available operators are +, -, *, /, sqrt, undo, clear.
-  - The ‘clear’ operator removes all items from the stack.
-  - The ‘undo’ operator undoes the previous operation. “undo undo” will undo the previous two operations.
-  - Sqrt performs a square root on the top item from the stack.
-  - The ‘+’, ‘-’, ‘*’, ‘/’ operators perform addition, subtraction, multiplication and division respectively on the top
-  two items from the stack.
 - If an operator cannot find a sufficient number of parameters on the stack, a warning is displayed:
 `operator <operator> (position: <pos>): insufficient parameters`. After displaying the warning, all further processing
 of the string terminates and the current state of the stack is displayed.
 
-![Example](assets/example.png)
+The RPN calculator is built with the following technologies:
+- Java 11
+- Maven
+
+## Operations
+
+![Operations](assets/operations.png)
+
+- The ‘clear’ operator removes all items from the stack.
+- The ‘undo’ operator undoes the previous operation. “undo undo” will undo the previous two operations. The memento
+  pattern is used as this lets save and restore the previous state of an object.
+- Sqrt performs a square root on the top item from the stack.
+- The ‘+’, ‘-’, ‘*’, ‘/’ operators perform addition, subtraction, multiplication and division respectively on the top
+  two items from the stack.
+- More operators can be added by simply implementing the Operation class.
 
 ## Usage
 
