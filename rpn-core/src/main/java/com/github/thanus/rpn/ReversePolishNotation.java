@@ -21,27 +21,28 @@ public class ReversePolishNotation {
         addMemento(calculatorContext.save());
     }
 
-    public void process(String expression) {
+    public void evaluate(String input) {
         var position = 1;
 
-        for (var val : expression.trim().split(" ")) {
-            try {
-                final var operand = new Operand(val);
+        for (var value : input.trim().split(" ")) {
+            if (Operand.isNumber(value)) {
+                final var operand = new Operand(value);
                 calculatorContext.push(operand);
+
                 addMemento(calculatorContext.save());
-                position += val.length() + 1;
+                position += value.length() + 1;
+
                 continue;
-            } catch (NumberFormatException ignored) {
             }
 
             try {
-                final var operation = OperationsParser.parse(val);
+                final var operation = OperationsParser.parse(value);
                 operation.operate(calculatorContext, mementos);
 
                 addMemento(calculatorContext.save());
-                position += val.length() + 1;
+                position += value.length() + 1;
             } catch (InsufficientParametersException e) {
-                log.warn("operator {} (position: {}): insufficient parameters", val, position);
+                log.warn("operator {} (position: {}): insufficient parameters", value, position);
                 break;
             } catch (UnknownOperationException exception) {
                 log.error("operator {} (position: {}): unknown operator", exception.getOperation(), position);

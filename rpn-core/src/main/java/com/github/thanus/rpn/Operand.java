@@ -21,6 +21,15 @@ public class Operand {
         this.value = value;
     }
 
+    public static boolean isNumber(String number) {
+        try {
+            new BigDecimal(number);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     public BigDecimal getValue() {
         return value;
     }
