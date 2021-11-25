@@ -7,16 +7,22 @@ import java.util.Scanner;
 
 @Slf4j
 public class ReversePolishNotationCLI {
+
+    private final Scanner scanner;
+    private final ReversePolishNotation reversePolishNotation;
+
+    public ReversePolishNotationCLI(Scanner scanner, ReversePolishNotation reversePolishNotation) {
+        this.scanner = scanner;
+        this.reversePolishNotation = reversePolishNotation;
+    }
+
     public static void main(String[] args) {
-        final var cli = new ReversePolishNotationCLI();
+        final var cli = new ReversePolishNotationCLI(new Scanner(System.in), new ReversePolishNotation());
         cli.run();
     }
 
-    private void run() {
+    public void run() {
         log.info("Enter expression");
-
-        final var scanner = new Scanner(System.in);
-        final var reversePolishNotation = new ReversePolishNotation();
 
         while (scanner.hasNextLine()) {
             log.info("stack: " + reversePolishNotation.evaluate(scanner.nextLine()));

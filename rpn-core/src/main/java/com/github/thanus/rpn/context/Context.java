@@ -20,5 +20,4 @@ public interface Context<NUMBER> {
     CalculatorContextMemento<NUMBER> save();
 
     void restore(CalculatorContextMemento<NUMBER> previousState);
-
 }

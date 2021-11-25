@@ -5,9 +5,6 @@ import com.github.thanus.rpn.Operand;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
-/**
- * originator
- */
 public class CalculatorContext implements Context<Operand> {
     private Stack<Operand> stack = new Stack<>();
 

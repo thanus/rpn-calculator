@@ -63,8 +63,23 @@ class ReversePolishNotationTest {
     }
 
     @Test
+    void example7() {
+        final var reversePolishNotation = new ReversePolishNotation();
+        assertThat(reversePolishNotation.evaluate("1 2 3 4 5")).isEqualTo("1 2 3 4 5");
+
+        assertThat(reversePolishNotation.evaluate("* * * *")).isEqualTo("120");
+    }
+
+    @Test
     void example8() {
         final var reversePolishNotation = new ReversePolishNotation();
         assertThat(reversePolishNotation.evaluate("1 2 3 * 5 + * * 6 5")).isEqualTo("11");
+    }
+
+    @Test
+    void shouldNotFailOnUnknownOperation() {
+        final var reversePolishNotation = new ReversePolishNotation();
+        assertThat(reversePolishNotation.evaluate("1 2")).isEqualTo("1 2");
+        assertThat(reversePolishNotation.evaluate("a +")).isEqualTo("1 2");
     }
 }

@@ -11,14 +11,19 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/**
- * caretaker
- */
 @Slf4j
 public class ReversePolishNotation {
 
     private final Deque<CalculatorContextMemento<Operand>> mementos = new ArrayDeque<>();
-    private final Context<Operand> calculatorContext = new CalculatorContext();
+    private final Context<Operand> calculatorContext;
+
+    public ReversePolishNotation() {
+        this.calculatorContext = new CalculatorContext();
+    }
+
+    public ReversePolishNotation(Context<Operand> calculatorContext) {
+        this.calculatorContext = calculatorContext;
+    }
 
     public String evaluate(String input) {
         var position = 1;
@@ -27,11 +32,8 @@ public class ReversePolishNotation {
             addMemento(calculatorContext.save());
 
             if (Operand.isNumber(value)) {
-                final var operand = new Operand(value);
-                calculatorContext.push(operand);
-
+                calculatorContext.push(new Operand(value));
                 position += value.length() + 1;
-
                 continue;
             }
 
