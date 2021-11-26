@@ -28,7 +28,7 @@ public class ReversePolishNotation {
     public String evaluate(String input) {
         var position = 1;
 
-        for (var value : input.trim().split(" ")) {
+        for (var value : input.trim().split(" +")) {
             addMemento(calculatorContext.save());
 
             if (Operand.isNumber(value)) {

@@ -82,4 +82,10 @@ class ReversePolishNotationTest {
         assertThat(reversePolishNotation.evaluate("1 2")).isEqualTo("1 2");
         assertThat(reversePolishNotation.evaluate("a +")).isEqualTo("1 2");
     }
+
+    @Test
+    void shouldAllowMultipleSpacesInInput() {
+        final var reversePolishNotation = new ReversePolishNotation();
+        assertThat(reversePolishNotation.evaluate("1 2  3")).isEqualTo("1 2 3");
+    }
 }
